@@ -17,7 +17,7 @@ export class GithubSearchService {
   }
 
   search(user: String){
-    return this._http.get("https://api.github.com/search/users?q="+user);
+    return this._http.get("https://api.github.com/search/users?q="+user + "&sort=score&order=desc");
   }
 
 }

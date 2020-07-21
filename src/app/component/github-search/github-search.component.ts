@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { GithubSearchService } from 'src/app/services/github-search.service';
 // import 'rxjs/add/operator/map';
 
-import { GithubUser } from 'src/app/models/protoGithubUser';
+import { PrototypeGithubUser } from 'src/app/models/prototype-github-user';
 
 @Component({
   selector: 'app-github-search',
@@ -11,7 +11,7 @@ import { GithubUser } from 'src/app/models/protoGithubUser';
 })
 export class GithubSearchComponent implements OnInit {
 
-  githubUser: GithubUser;
+  githubUser: PrototypeGithubUser;
   username : String;
   constructor(private _githubService: GithubSearchService) { }
 
