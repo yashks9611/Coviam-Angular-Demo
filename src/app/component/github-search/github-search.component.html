@@ -1,7 +1,52 @@
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-center">
+<nav class="navbar sticky-top navbar-expand-sm bg-dark navbar-dark justify-content-center">
     <a class="navbar-brand">Github Search</a>
+    
+
     <form class="form-inline">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="username" [(ngModel)]="username" (keyup) = "searchUser()">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="username" [(ngModel)]="username">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click) = "searchUser(1)">Search</button>
       </form>
+      <span class="navbar-text m-2 my-lg-0" [style.visibility]="display? 'visible' : 'hidden'">Page : {{pageNumber}}</span>
 </nav>
+
+<div infinite-scroll
+[infiniteScrollDistance]="scrollDistance"
+[infiniteScrollUpDistance]="scrollUpDistance"
+[infiniteScrollThrottle]="throttle"
+(scrolled)="onScrollDown()">
+<!-- (scrolledUp)="onUp()"
+> -->
+  <div *ngIf="githubUserArray.length>0" class="container-xl mx-auto">
+    <div class="card-deck m-4" >
+      <div class="col-4  m-4 mx-auto" *ngFor="let githubUser of githubUserArray|slice:0:numberOfItemsOnPage">
+        <div class="card text-white bg-dark" (click) = "showModal(template,githubUser)">
+          <img [src]="githubUser.avatar_url" class="img-fluid card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">{{githubUser.login}}</h5>
+            <p class="card-text">Score : {{ githubUser.score }}</p>
+          </div>
+        </div>
+      </div>
+    </div> 
+  </div>
+</div>
+
+
+<ng-template #template>
+  <div class="modal-header">
+    <h2 class="modal-title pull-left">{{modalUser.login}}</h2>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h6>Followers : {{modalUser.followers}}</h6>
+    <h6>Following : {{modalUser.following}}</h6>
+    <h6>Created On : {{modalUser.createdOn}}</h6>
+    <h6>Admin : {{modalUser.admin}}</h6>
+    <h6>Repositories</h6>
+    <ul *ngFor = "let repo of modalUser.repos">
+      <li>{{repo}}</li>
+    </ul>
+  </div>
+</ng-template>

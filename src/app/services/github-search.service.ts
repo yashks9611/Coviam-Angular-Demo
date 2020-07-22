@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClientModule, HttpClient }    from '@angular/common/http';
+import { formatCurrency } from '@angular/common';
 
 
 @Injectable({
@@ -16,8 +17,17 @@ export class GithubSearchService {
     this.userName = '';
   }
 
-  search(user: String){
-    return this._http.get("https://api.github.com/search/users?q="+user + "&sort=score&order=desc");
+  search(user: any,page : number){
+    return this._http.get("https://api.github.com/search/users?q="+user + "&sort=score&order=desc&page=" + page+"&per_page=6");
+  }
+
+  getRepos(reposUrl : any){
+    // console.log(this._http.get(reposUrl));
+    return this._http.get(reposUrl);
+  }
+
+  getDetails(profileUrl : any){
+    return this._http.get(profileUrl);
   }
 
 }

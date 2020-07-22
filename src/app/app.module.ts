@@ -2,6 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule }   from '@angular/forms';
 import { HttpClientModule }    from '@angular/common/http';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,7 +23,9 @@ import { GithubSearchService} from "./services/github-search.service";
     FormsModule,
     HttpClientModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ModalModule.forRoot(),
+    InfiniteScrollModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
