@@ -2,11 +2,15 @@
     <a class="navbar-brand">Github Search</a>
     
 
-    <form class="form-inline">
+    <form class="form-inline form-check">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="username" [(ngModel)]="username">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click) = "searchUser(1)">Search</button>
+        <button class="btn btn-outline-success  mr-4 my-2 my-sm-0" type="submit" (click) = "searchUser(1)">Search</button>
+        <input class="form-control ml-4 mr-2 my-lg-0 float-right" type="checkbox" value="" id="defaultCheck1" name = "isChecked"[(ngModel)]="isChecked" (change)="defineOrder()">
+        <label class="form-control-label bg-dark text-white mr-4" for="defaultCheck1">
+          Descending Order
+        </label>
       </form>
-      <span class="navbar-text m-2 my-lg-0" [style.visibility]="display? 'visible' : 'hidden'">Page : {{pageNumber}}</span>
+      <span class="navbar-text m-4 my-lg-0" [style.visibility]="display? 'visible' : 'hidden'">Page : {{pageNumber}}</span>
 </nav>
 
 <div infinite-scroll

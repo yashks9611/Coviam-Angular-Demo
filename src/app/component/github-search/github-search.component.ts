@@ -23,13 +23,15 @@ export class GithubSearchComponent implements OnInit {
   modalUser : UserModalDetails = new UserModalDetails();
   pageNumber : number = 1;
   display:boolean = false;
+  isChecked : boolean = false;
   constructor(private _githubService: GithubSearchService, private modalService: BsModalService) { }
   
   ngOnInit(): void {
   }
 
   searchUser(pageNo : number){
-    this._githubService.search(this.username,pageNo).subscribe((users: any) => {
+    console.log(this.isChecked); 
+    this._githubService.search(this.username,pageNo,this.isChecked).subscribe((users: any) => {
       // debugger;
       console.log(users);
 
@@ -75,6 +77,14 @@ export class GithubSearchComponent implements OnInit {
     this.pageNumber++;
     this.numberOfItemsOnPage+=6;
     this.searchUser(this.pageNumber);
+  }
+
+  defineOrder(){
+    if(this.username!=null){
+      this.githubUserArray =[];
+      this.pageNumber=1;
+      this.searchUser(this.pageNumber);
+    }
   }
 
   // onUp(){
