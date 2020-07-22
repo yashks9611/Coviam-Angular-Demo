@@ -19,9 +19,9 @@ export class GithubSearchService {
 
   search(user: any,page : number,desc : boolean){
     if (desc) {
-      return this._http.get("https://api.github.com/search/users?q="+user + "&sort=repositories&order=desc&page=" + page+"&per_page=6");
+      return this._http.get("https://api.github.com/search/users?q="+user + "&sort=score&order=desc&page=" + page+"&per_page=6");
     } else {
-      return this._http.get("https://api.github.com/search/users?q="+user + "&sort=repositories&order=asc&page=" + page+"&per_page=6");
+      return this._http.get("https://api.github.com/search/users?q="+user + "&sort=score&order=asc&page=" + page+"&per_page=6");
       
     }
   }
